@@ -8,7 +8,7 @@
  *                        Aleksandr Romanov 
  */ 
 
- `include "sr_cpu.vh"
+`include "sr_cpu.vh"
 
 module sr_alu
 (

@@ -20,6 +20,7 @@
 `define ALU_SRL     3'b010
 `define ALU_SLTU    3'b011
 `define ALU_SUB     3'b100
+`define ALU_SLLI    3'b101
 
 // Instruction opcode
 
@@ -32,6 +33,7 @@
 `define RVOP_SRL    7'b0110011
 `define RVOP_SLTU   7'b0110011
 `define RVOP_SUB    7'b0110011
+`define RVOP_SLLI   7'b0010011
 
 // Instruction funct3
 
@@ -44,6 +46,7 @@
 `define RVF3_SLTU   3'b011
 `define RVF3_SUB    3'b000
 `define RVF3_ANY    3'b???
+`define RVF3_SLLI   3'b001
 
 // Instruction funct7
 
@@ -53,5 +56,6 @@
 `define RVF7_SLTU   7'b0000000
 `define RVF7_SUB    7'b0100000
 `define RVF7_ANY    7'b???????
+`define RVF7_SLLI   7'b0000000
 
 `endif  // `ifndef SR_CPU_SVH

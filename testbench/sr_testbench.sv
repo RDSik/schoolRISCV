@@ -10,7 +10,7 @@
 //  for systemverilog-homework project.
 //
 
-module testbench;
+module sr_testbench;
 
     logic        clk;
     logic        rst;

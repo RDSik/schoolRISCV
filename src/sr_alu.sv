@@ -29,6 +29,7 @@ module sr_alu
             `ALU_SRL  : result =  srcA >> srcB [4:0];
             `ALU_SLTU : result = (srcA <  srcB) ? 32'd1 : 32'd0;
             `ALU_SUB  : result =  srcA -  srcB;
+            `ALU_SLLI : result =  srcA << srcB [4:0];
         endcase
 
     assign zero = (result == '0);

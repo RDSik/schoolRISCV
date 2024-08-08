@@ -6,11 +6,11 @@ vlib work
 vlog -vlog01compat \
      +incdir+../../../src \
      +incdir+../../../testbench \
-     ../../../src/*.v \
-     ../../../testbench/*.v
+     ../../../src/*.sv \
+     ../../../testbench/*.sv
 
 # run simulator
-vsim -voptargs="+acc" work.sm_testbench
+vsim -voptargs="+acc" work.sr_testbench
 
 # add signals to waveform
 add wave -radix hex sim:/sm_testbench/sm_top/sm_cpu/*

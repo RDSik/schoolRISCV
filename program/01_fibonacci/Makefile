@@ -76,15 +76,15 @@ modelsim: program.hex
 #########################################################
 # simulation in Icarus verilog
 
-TOPMODULE=sr_testbench
+TOPMODULE=sm_testbench
 IVARG = -g2005
 IVARG += -D ICARUS
 IVARG += -I ../
 IVARG += -I ../../../src
 IVARG += -I ../../../testbench
 IVARG += -s $(TOPMODULE)
-IVARG += ../../../src/*.sv
-IVARG += ../../../testbench/*.sv
+IVARG += ../../../src/*.v
+IVARG += ../../../testbench/*.v
 
 # make icarus - run compilation using Icarus Verilog simulator
 #    rm -rf sim; mkdir sim; - recreate simulation folder

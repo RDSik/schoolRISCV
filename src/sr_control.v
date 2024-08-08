@@ -1,35 +1,32 @@
-//
-//  schoolRISCV - small RISC-V CPU
-//
-//  Originally based on Sarah L. Harris MIPS CPU
-//  & schoolMIPS project.
-//
-//  Copyright (c) 2017-2020 Stanislav Zhelnio & Aleksandr Romanov.
-//
-//  Modified in 2024 by Yuri Panchul & Mike Kuskov
-//  for systemverilog-homework project.
-//
+/*
+ * schoolRISCV - small RISC-V CPU 
+ *
+ * originally based on Sarah L. Harris MIPS CPU 
+ *                   & schoolMIPS project
+ * 
+ * Copyright(c) 2017-2020 Stanislav Zhelnio 
+ *                        Aleksandr Romanov 
+ */ 
 
-`include "sr_cpu.svh"
+`include "sr_cpu.vh"
 
 module sr_control
 (
-    input        [ 6:0] cmdOp,
-    input        [ 2:0] cmdF3,
-    input        [ 6:0] cmdF7,
-    input               aluZero,
-    output              pcSrc,
-    output logic        regWrite,
-    output logic        aluSrc,
-    output logic        wdSrc,
-    output logic [ 2:0] aluControl
+    input     [ 6:0] cmdOp,
+    input     [ 2:0] cmdF3,
+    input     [ 6:0] cmdF7,
+    input            aluZero,
+    output           pcSrc, 
+    output reg       regWrite, 
+    output reg       aluSrc,
+    output reg       wdSrc,
+    output reg [2:0] aluControl
 );
-    logic          branch;
-    logic          condZero;
+    reg          branch;
+    reg          condZero;
     assign pcSrc = branch & (aluZero == condZero);
 
-    always_comb
-    begin
+    always @ (*) begin
         branch      = 1'b0;
         condZero    = 1'b0;
         regWrite    = 1'b0;
@@ -37,7 +34,7 @@ module sr_control
         wdSrc       = 1'b0;
         aluControl  = `ALU_ADD;
 
-        casez ({ cmdF7, cmdF3, cmdOp })
+        casez( {cmdF7, cmdF3, cmdOp} )
             { `RVF7_ADD,  `RVF3_ADD,  `RVOP_ADD  } : begin regWrite = 1'b1; aluControl = `ALU_ADD;  end
             { `RVF7_OR,   `RVF3_OR,   `RVOP_OR   } : begin regWrite = 1'b1; aluControl = `ALU_OR;   end
             { `RVF7_SRL,  `RVF3_SRL,  `RVOP_SRL  } : begin regWrite = 1'b1; aluControl = `ALU_SRL;  end
@@ -52,5 +49,4 @@ module sr_control
             { `RVF7_ANY,  `RVF3_BNE,  `RVOP_BNE  } : begin branch = 1'b1; aluControl = `ALU_SUB; end
         endcase
     end
-
 endmodule

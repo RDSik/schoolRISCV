@@ -1,20 +1,14 @@
-//
-//  schoolRISCV - small RISC-V CPU
-//
-//  Originally based on Sarah L. Harris MIPS CPU
-//  & schoolMIPS project.
-//
-//  Copyright (c) 2017-2020 Stanislav Zhelnio & Aleksandr Romanov.
-//
-//  Modified in 2024 by Yuri Panchul & Mike Kuskov
-//  for systemverilog-homework project.
-//
+/*
+ * schoolRISCV - small RISC-V CPU 
+ *
+ * originally based on Sarah L. Harris MIPS CPU 
+ *                   & schoolMIPS project
+ * 
+ * Copyright(c) 2017-2020 Stanislav Zhelnio 
+ *                        Aleksandr Romanov 
+ */ 
 
-`ifndef SR_CPU_SVH
-`define SR_CPU_SVH
-
-// ALU commands
-
+//ALU commands
 `define ALU_ADD     3'b000
 `define ALU_OR      3'b001
 `define ALU_SRL     3'b010
@@ -22,8 +16,7 @@
 `define ALU_SUB     3'b100
 `define ALU_SLLI    3'b101
 
-// Instruction opcode
-
+// instruction opcode
 `define RVOP_ADDI   7'b0010011
 `define RVOP_BEQ    7'b1100011
 `define RVOP_LUI    7'b0110111
@@ -35,8 +28,7 @@
 `define RVOP_SUB    7'b0110011
 `define RVOP_SLLI   7'b0010011
 
-// Instruction funct3
-
+// instruction funct3
 `define RVF3_ADDI   3'b000
 `define RVF3_BEQ    3'b000
 `define RVF3_BNE    3'b001
@@ -48,8 +40,7 @@
 `define RVF3_ANY    3'b???
 `define RVF3_SLLI   3'b001
 
-// Instruction funct7
-
+// instruction funct7
 `define RVF7_ADD    7'b0000000
 `define RVF7_OR     7'b0000000
 `define RVF7_SRL    7'b0000000
@@ -57,5 +48,3 @@
 `define RVF7_SUB    7'b0100000
 `define RVF7_ANY    7'b???????
 `define RVF7_SLLI   7'b0000000
-
-`endif  // `ifndef SR_CPU_SVH

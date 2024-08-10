@@ -91,16 +91,26 @@ module sm_testbench;
         casez( { cmdF7, cmdF3, cmdOp } )
             default :                                $write ("new/unknown");
             { `RVF7_ADD,  `RVF3_ADD,  `RVOP_ADD  } : $write ("add   $%1d, $%1d, $%1d", rd, rs1, rs2);
+            { `RVF7_AND,  `RVF3_AND,  `RVOP_AND  } : $write ("and   $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_OR,   `RVF3_OR,   `RVOP_OR   } : $write ("or    $%1d, $%1d, $%1d", rd, rs1, rs2);
+            { `RVF7_XOR,  `RVF3_XOR,  `RVOP_XOR  } : $write ("xor   $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_SRL,  `RVF3_SRL,  `RVOP_SRL  } : $write ("srl   $%1d, $%1d, $%1d", rd, rs1, rs2);
+            { `RVF7_SLL,  `RVF3_SLL,  `RVOP_SLL  } : $write ("sll   $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_SLTU, `RVF3_SLTU, `RVOP_SLTU } : $write ("sltu  $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_SUB,  `RVF3_SUB,  `RVOP_SUB  } : $write ("sub   $%1d, $%1d, $%1d", rd, rs1, rs2);
 
+            { `RVF7_SRLI, `RVF3_SRLI, `RVOP_SRLI } : $write ("srli  $%1d, $%1d, 0x%8h",rd, rs1, immI);
+            { `RVF7_SLLI, `RVF3_SLLI, `RVOP_SLLI } : $write ("slli  $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_ANY,  `RVF3_ADDI, `RVOP_ADDI } : $write ("addi  $%1d, $%1d, 0x%8h",rd, rs1, immI);
+            { `RVF7_ANY,  `RVF3_ANDI, `RVOP_ANDI } : $write ("andi  $%1d, $%1d, 0x%8h",rd, rs1, immI);
+            { `RVF7_ANY,  `RVF3_XORI, `RVOP_XORI } : $write ("xori  $%1d, $%1d, 0x%8h",rd, rs1, immI);
+            { `RVF7_ANY,  `RVF3_ORI,  `RVOP_ORI  } : $write ("ori   $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_ANY,  `RVF3_ANY,  `RVOP_LUI  } : $write ("lui   $%1d, 0x%8h",      rd, immU);
 
             { `RVF7_ANY,  `RVF3_BEQ,  `RVOP_BEQ  } : $write ("beq   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
             { `RVF7_ANY,  `RVF3_BNE,  `RVOP_BNE  } : $write ("bne   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
+            { `RVF7_ANY,  `RVF3_BGE,  `RVOP_BGE  } : $write ("bge   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
+            { `RVF7_ANY,  `RVF3_BLT,  `RVOP_BLT  } : $write ("blt   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
         endcase
     end
     endtask

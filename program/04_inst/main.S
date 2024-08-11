@@ -1,6 +1,6 @@
 # program/04_inst/main.S
 #
-# RISC-V new instructions (and, andi, xor, xori, ori) software test
+# RISC-V new instructions (and, andi, xor, xori, ori, srli, bge) software test
 #
 
             .text

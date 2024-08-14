@@ -1,6 +1,6 @@
 # program/03_slli/main.S
 #
-# RISC-V new instruction (slli) software test
+# RISC-V new instructions (slli, blt) software test
 #
 
             .text

@@ -8,6 +8,9 @@
  *                        Aleksandr Romanov 
  */ 
 
+`ifndef SR_CPU_VH
+`define SR_CPU_VH
+
 //ALU commands
 `define ALU_ADD     4'b0000
 `define ALU_OR      4'b0001
@@ -72,3 +75,5 @@
 `define RVF7_SLTU   7'b0000000
 `define RVF7_SUB    7'b0100000
 `define RVF7_ANY    7'b???????
+
+`endif  // `ifndef SR_CPU_VH

@@ -20,8 +20,9 @@ module sr_decode
     output     [ 4:0] rs2,
     output     [ 6:0] cmdF7,
     output reg [31:0] immI,
+    output reg [31:0] immS,
     output reg [31:0] immB,
-    output reg [31:0] immU 
+    output reg [31:0] immU
 );
     assign cmdOp = instr[ 6: 0];
     assign rd    = instr[11: 7];
@@ -34,6 +35,13 @@ module sr_decode
     always @ (*) begin
         immI[10: 0] = instr[30:20];
         immI[31:11] = { 21 {instr[31]} };
+    end
+
+    // S-immediate
+    always @ (*) begin
+        immS[ 4: 0] = instr[11: 7];
+        immS[10: 5] = instr[30:25];
+        immS[31:11] = { 21 {instr[31]} };
     end
 
     // B-immediate

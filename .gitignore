@@ -7,6 +7,8 @@ sim/
 *.lst
 *.map
 *.rec
+*.wlf
+work/
 
 FPGA*.txt
 test.html

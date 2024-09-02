@@ -10,11 +10,13 @@
 
 `timescale 1 ns / 100 ps
 
-`include "sr_cpu.vh"
+`include "../src/sr_cpu.vh"
 
 `ifndef SIMULATION_CYCLES
     `define SIMULATION_CYCLES 120
 `endif
+
+
 
 module sm_testbench;
 
@@ -27,16 +29,20 @@ module sm_testbench;
     wire        cpuClk;
 
     // ***** DUT start ************************
+    // CACHE_ENABLE 1 -> ON
+    // CACHE_ENABLE 0 -> OFF
+    localparam  CACHE_EN = 1'b1;
 
-    sm_top sm_top
+    sm_top #(.CACHE_EN(CACHE_EN)) sm_top
     (
         .clkIn     ( clk     ),
         .rst_n     ( rst_n   ),
-        .clkDivide ( 4'b0    ),
+        .clkDevide ( 4'b0    ),
         .clkEnable ( 1'b1    ),
         .clk       ( cpuClk  ),
         .regAddr   ( 5'b0    ),
-        .regData   (         )
+        .regData   (         ),
+        .cycleCnt_o(         )
     );
 
     defparam sm_top.sm_clk_divider.bypass = 1;
@@ -98,7 +104,7 @@ module sm_testbench;
             { `RVF7_SLL,  `RVF3_SLL,  `RVOP_SLL  } : $write ("sll   $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_SLTU, `RVF3_SLTU, `RVOP_SLTU } : $write ("sltu  $%1d, $%1d, $%1d", rd, rs1, rs2);
             { `RVF7_SUB,  `RVF3_SUB,  `RVOP_SUB  } : $write ("sub   $%1d, $%1d, $%1d", rd, rs1, rs2);
-
+        
             { `RVF7_SRLI, `RVF3_SRLI, `RVOP_SRLI } : $write ("srli  $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_SLLI, `RVF3_SLLI, `RVOP_SLLI } : $write ("slli  $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_ANY,  `RVF3_ADDI, `RVOP_ADDI } : $write ("addi  $%1d, $%1d, 0x%8h",rd, rs1, immI);
@@ -106,7 +112,7 @@ module sm_testbench;
             { `RVF7_ANY,  `RVF3_XORI, `RVOP_XORI } : $write ("xori  $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_ANY,  `RVF3_ORI,  `RVOP_ORI  } : $write ("ori   $%1d, $%1d, 0x%8h",rd, rs1, immI);
             { `RVF7_ANY,  `RVF3_ANY,  `RVOP_LUI  } : $write ("lui   $%1d, 0x%8h",      rd, immU);
-
+        
             { `RVF7_ANY,  `RVF3_BEQ,  `RVOP_BEQ  } : $write ("beq   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
             { `RVF7_ANY,  `RVF3_BNE,  `RVOP_BNE  } : $write ("bne   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
             { `RVF7_ANY,  `RVF3_BGE,  `RVOP_BGE  } : $write ("bge   $%1d, $%1d, 0x%8h (%1d)", rs1, rs2, immB, immB);
@@ -118,24 +124,30 @@ module sm_testbench;
 
     //simulation debug output
     integer cycle; initial cycle = 0;
+   
 
+            
     always @ (posedge clk)
-    begin
+        if (sm_top.sm_cpu.im_drdy) begin 
         $write ("%5d  pc = %2h instr = %h   a0 = %1d", 
                   cycle, sm_top.sm_cpu.pc, sm_top.sm_cpu.instr, sm_top.sm_cpu.rf.rf[10]);
 
         disasmInstr();
 
         $write("\n");
-
+    
         cycle = cycle + 1;
 
-        if (cycle > `SIMULATION_CYCLES)
-        begin
-            cycle = 0;
-            $display ("Timeout");
-            $stop;
-        end
+//        if (cycle > `SIMULATION_CYCLES)
+//        begin
+//            cycle = 0;
+//            $display ("Timeout");
+//            $stop;
+//        end
     end
+    
+    always @(posedge clk)
+        if (sm_top.sm_cpu.instr == 32'h63) 
+          $stop;  
 
 endmodule

@@ -17,7 +17,7 @@ module sm_clk_divider
 (
     input           clkIn,
     input           rst_n,
-    input   [ 3:0 ] divide,
+    input   [ 3:0 ] devide,
     input           enable,
     output          clkOut
 );
@@ -26,5 +26,5 @@ module sm_clk_divider
     sm_register_we r_cntr(clkIn, rst_n, enable, cntrNext, cntr);
 
     assign clkOut = bypass ? clkIn 
-                           : cntr[shift + divide];
+                           : cntr[shift + devide];
 endmodule

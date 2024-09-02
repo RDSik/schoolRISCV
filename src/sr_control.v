@@ -59,6 +59,8 @@ module sr_control
             { `RVF7_ANY,  `RVF3_BNE,  `RVOP_BNE  } : begin branch = 1'b1; aluControl = `ALU_SUB; end
             { `RVF7_ANY,  `RVF3_BLT,  `RVOP_BLT  } : begin branch = 1'b1; aluControl = `ALU_SUB; end
             { `RVF7_ANY,  `RVF3_SW,   `RVOP_SW   } : begin memWrite = 1'b1; aluSrc = `SRC_B_IMM_S; aluControl = `ALU_ADD; end
+            { `RVF7_ANY,  `RVF3_SH,   `RVOP_SH   } : begin memWrite = 1'b1; aluSrc = `SRC_B_IMM_S; aluControl = `ALU_ADD; end
+            { `RVF7_ANY,  `RVF3_SB,   `RVOP_SB   } : begin memWrite = 1'b1; aluSrc = `SRC_B_IMM_S; aluControl = `ALU_ADD; end
         endcase
     end
 endmodule

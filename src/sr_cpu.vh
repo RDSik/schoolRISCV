@@ -28,6 +28,8 @@
 
 // instruction opcode
 `define RVOP_SW     7'b0100011
+`define RVOP_SH     7'b0100011
+`define RVOP_SB     7'b0100011
 `define RVOP_ADD    7'b0110011
 `define RVOP_AND    7'b0110011
 `define RVOP_OR     7'b0110011
@@ -50,6 +52,8 @@
 
 // instruction funct3
 `define RVF3_SW     3'b010
+`define RVF3_SH     3'b001
+`define RVF3_SB     3'b000
 `define RVF3_ADD    3'b000
 `define RVF3_ADDI   3'b000
 `define RVF3_AND    3'b111

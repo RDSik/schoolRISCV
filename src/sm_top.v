@@ -90,7 +90,7 @@ module sm_top
     );
  
     srv_icache #(
-    .CACHE_EN(CACHE_EN)
+        .CACHE_EN(CACHE_EN)
     ) sm_icache (
         .clk        (clk     ),
         .rst_n      (rst_n   ),

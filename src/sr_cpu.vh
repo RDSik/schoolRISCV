@@ -22,9 +22,9 @@
 `define ALU_XOR     4'b1000
 
 // ALU source B control signal encoding
- `define SRC_B_RD2   2'b00
- `define SRC_B_IMM_I 2'b01
- `define SRC_B_IMM_S 2'b10
+`define SRC_B_RD2   2'b00
+`define SRC_B_IMM_I 2'b01
+`define SRC_B_IMM_S 2'b10
 
 // instruction opcode
 `define RVOP_SW     7'b0100011

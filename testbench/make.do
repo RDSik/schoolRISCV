@@ -21,7 +21,6 @@ vlog  sm_testbench.v
 
 vsim -voptargs="+acc" sm_testbench
 add log -r /*
-wave zoom full
 
 ###############################
 # Add signals to time diagram #
@@ -66,3 +65,4 @@ add wave -color #cccc00 -radix unsigned -group CYCLE_CNT  \
 sm_testbench/sm_top/i_cycle_cnt/en_i \
 
 run -all
+wave zoom full
